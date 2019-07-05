@@ -7,11 +7,24 @@
 
 var axios = require("axios");
 
-
 var action = process.argv[2];
 
 var nodeArgs = process.argv;
 
+var movieName = "";
+
+
+for (var i = 3; i < nodeArgs.length; i++) {
+
+    if (i > 3 && i < nodeArgs.length) {
+        movieName = movieName + "+" + nodeArgs[i];
+    } else {
+        movieName += nodeArgs[i];
+
+    }
+    
+    console.log(movieName);
+}
 
 switch (action){
     case "movie-this":
@@ -27,24 +40,9 @@ switch (action){
 
 // `spotify-this-song`
 
-// `movie-this`
 function movieThis() {
 
-    var movieName = "";
-
-    for (var i = 3; i < nodeArgs.length; i++) {
-
-        if (i > 3 && i < nodeArgs.length) {
-            movieName = movieName + "+" + nodeArgs[i];
-        } else {
-            movieName += nodeArgs[i];
-
-        }
-
-        console.log(movieName);
-    }
-
-  /*  var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy";
+    var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy";
 
     console.log(queryUrl);
 
@@ -74,7 +72,7 @@ function movieThis() {
             console.log(error.config);
         });
 
-*/
+
 };
 
 // `do-what-it-says`
