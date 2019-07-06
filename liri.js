@@ -11,6 +11,8 @@ var axios = require("axios");
 
 var fs = require("fs");
 
+var moment = require("moment");
+
 var action = process.argv[2];
 
 var nodeArgs = process.argv;
@@ -38,7 +40,6 @@ for (var j = 3; j < nodeArgs.length; j++) {
         thisSong = thisSong + nodeArgs[j];
     } else {
         thisSong += nodeArgs[j];
-
     }
 
     console.log(thisSong);
@@ -75,7 +76,9 @@ function concertThis() {
     axios.get(queryUrl).then(
         function (response) {
             var respond = response.data;
-            console.log(respond);
+            console.log(respond[1].lineup); 
+            console.log(respond[1].venue.name + respond[1].venue.city + respond[1].venue.country);
+            console.log(moment(respond[1].datetime).format("MMMM Do YYYY"));
         })
         .catch(function (error) {
             if (error.response) {
@@ -126,7 +129,14 @@ function movieThis() {
     axios.get(queryUrl).then(
         function (response) {
             var respond = response.data;
-            console.log(respond);
+            console.log("Movie Title: " + respond.Title);
+            console.log("Year Movie Came Out: " + respond.Year);
+            console.log("imdb Rating: " + respond.imdbRating);
+            console.log("Rotten Tomatoes Rating: " + respond.Ratings[1].Value);
+            console.log("Country: " + respond.Country);
+            console.log("Primary Language: " + respond.Language);
+            console.log("Plot: " + respond.Plot);
+            console.log("Actors: " + respond.Actors);
         })
         .catch(function (error) {
             if (error.response) {
@@ -149,13 +159,10 @@ function movieThis() {
             console.log(error.config);
         });
 
-
 };
 
 // `do-what-it-says`
 function doWhatItSays() {
-
-
 
     fs.readFile("random.txt", "utf8", function (error, data) {
 
