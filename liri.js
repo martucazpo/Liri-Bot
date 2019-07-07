@@ -94,31 +94,39 @@ function concertThis() {
 
 function spotifyThisSong() {
 
+    var songId;
+    var artists;
+    var album;
+    var previewUrl;
+    var handleData;
+
     spotify.search({ type: 'track', query: thisName, limit: 5 }, function (err, data) {
         if (err) {
             return console.log('Error occurred: ' + err);
         }
+        
+        handleData = data.tracks.items
 
-        var dti = data.tracks.items;
-        var artists;
-        var album;
+        for (var h = 0; h < handleData.length; h++) {
 
-        console.log(artists);
-
-        for (j = 0; j < dti.length; j++) {
-
-            artists = dti[j].album.artists;
-            album = dti[j].album
-
-            console.log("Song Title: " + thisName);
-            console.log("Artists: " + artists);
-            console.log("Album Name: " + album.name);
-            console.log("Album Release Date: " + album.release_date);
+            console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+            
+            songId = data.tracks.items[h].id;
+            previewUrl = data.tracks.items[h].preview_url;
+            album = data.tracks.items[h].album.name;
+            artists = data.tracks.items[h].artists;
+            console.log("Song: ");
+            console.log(thisName);
+            console.log("Preview Url if available:");
+            console.log(previewUrl);
+            console.log("Album: ");
+            console.log(album);
+            console.log("Artists: ");
+            console.log(artists);
         }
+    })
 
-    });
-
-}
+};
 
 // `spotify-this-song`
 
@@ -140,47 +148,47 @@ function movieThis() {
             console.log("Plot: " + respond.Plot);
             console.log("Actors: " + respond.Actors);
 
+        })
+        /*   
+        var queryUrl = "http://www.omdbapi.com/?t=Mr.+Nobody&y=&plot=short&apikey=trilogy";
+    
+        console.log(queryUrl);
+    
+        axios.get(queryUrl).then(
+            function (response) {
+                var respond = response.data;
+                console.log("Movie Title: " + respond.Title);
+                console.log("Year Movie Came Out: " + respond.Year);
+                console.log("imdb Rating: " + respond.imdbRating);
+                console.log("Rotten Tomatoes Rating: " + respond.Ratings[1].Value);
+                console.log("Country: " + respond.Country);
+                console.log("Plot: " + respond.Plot);
+                console.log("Actors: " + respond.Actors);
+            })
+    
         }
-            .catch(function () {
+        */
 
-                var queryUrl = "http://www.omdbapi.com/?t=Mr.+Nobody&y=&plot=short&apikey=trilogy";
-
-                console.log(queryUrl);
-
-                axios.get(queryUrl).then(
-                    function (response) {
-                        var respond = response.data;
-                        console.log("Movie Title: " + respond.Title);
-                        console.log("Year Movie Came Out: " + respond.Year);
-                        console.log("imdb Rating: " + respond.imdbRating);
-                        console.log("Rotten Tomatoes Rating: " + respond.Ratings[1].Value);
-                        console.log("Country: " + respond.Country);
-                        console.log("Primary Language: " + respond.Language);
-                        console.log("Plot: " + respond.Plot);
-                        console.log("Actors: " + respond.Actors);
-                    })
-            }));
-
-      /*  .catch (function (error) {
-        if (error.response) {
-            // The request was made and the server responded with a status code
-            // that falls out of the range of 2xx
-            console.log("---------------Data---------------");
-            console.log(error.response.data);
-            console.log("---------------Status---------------");
-            console.log(error.response.status);
-            console.log("---------------Status---------------");
-            console.log(error.response.headers);
-        } else if (error.request) {
-            // The request was made but no response was received
-            // `error.request` is an object that comes back with details pertaining to the error that occurred.
-            console.log(error.request);
-        } else {
-            // Something happened in setting up the request that triggered an Error
-            console.log("Error", error.message);
-        }
-        console.log(error.config);
-    });*/
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log("---------------Data---------------");
+                console.log(error.response.data);
+                console.log("---------------Status---------------");
+                console.log(error.response.status);
+                console.log("---------------Status---------------");
+                console.log(error.response.headers);
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an object that comes back with details pertaining to the error that occurred.
+                console.log(error.request);
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log("Error", error.message);
+            }
+            console.log(error.config);
+        });
 
 };
 
@@ -201,8 +209,7 @@ function doWhatItSays() {
         switch (action) {
             case "spotify-this-song":
                 doSpotifySong();
-            case "default":
-                break;
+            default: break;
         }
 
         function doSpotifySong() {
