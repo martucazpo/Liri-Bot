@@ -217,7 +217,7 @@ function movieThis() {
                 console.log(error.config);
             });
     }
-    if (thisName == null) {
+    if (nodeArgs == null || nodeArgs == undefined) {
 
         var queryUrl = "http://www.omdbapi.com/?t=Mr.+Nobody&y=&plot=short&apikey=trilogy";
 
