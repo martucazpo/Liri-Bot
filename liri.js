@@ -89,40 +89,88 @@ function concertThis() {
             console.log(error.config);
         });
 
+  /*  if (queryUrl == null) {
+        var queryUrl = "https://rest.bandsintown.com/artists/Celine+Dion/events?app_id=codingbootcamp";
+
+        console.log(queryUrl);
+
+        axios.get(queryUrl).then(
+            function (response) {
+                var respond = response.data;
+                console.log("Lineup: " + JSON.stringify(respond[1].lineup));
+                console.log("Location: " + respond[1].venue.name + ", " + respond[1].venue.city + ", " + respond[1].venue.country);
+                console.log(moment(respond[1].datetime).format("MM/DD/YYYY"));
+            })
+    } else {
+        console.log("Oooooops!");
+    }*/
+
 
 }
 
 function spotifyThisSong() {
 
-    var artists;
-    var album;
-    var previewUrl;
-    var handleData;
 
-    spotify.search({ type: 'track', query: thisName, limit: 5 }, function (err, data) {
-        if (err) {
-            return console.log('Error occurred: ' + err);
-        }
+    if (thisName == thisName) {
 
-        handleData = data.tracks.items
+        var artists;
+        var album;
+        var previewUrl;
+        var handleData;
 
-        for (var h = 0; h < handleData.length; h++) {
+
+        spotify.search({ type: 'track', query: thisName, limit: 5 }, function (err, data) {
+            if (err) {
+                return console.log('Error occurred: ' + err);
+            }
+
+            handleData = data.tracks.items
+
+            for (var h = 0; h < handleData.length; h++) {
+
+                console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+                previewUrl = data.tracks.items[h].preview_url;
+                album = data.tracks.items[h].album.name;
+                artists = data.tracks.items[h].artists;
+                console.log("Song: ");
+                console.log(thisName);
+                console.log("Preview Url if available:");
+                console.log(previewUrl);
+                console.log("Album: ");
+                console.log(album);
+                console.log("Artists: ");
+                console.log(artists);
+            }
+        })
+    }
+
+    if (thisName == null) {
+
+        spotify.search({ type: 'track', query: 'The Sign', limit: 1 }, function (err, data) {
+            if (err) {
+                return console.log('Error occurred: ' + err);
+            }
 
             console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
 
-            previewUrl = data.tracks.items[h].preview_url;
-            album = data.tracks.items[h].album.name;
-            artists = data.tracks.items[h].artists;
+            previewUrl = data.tracks.items.preview_url;
+            album = data.tracks.items.album.name;
+            artists = data.tracks.items.artists;
             console.log("Song: ");
-            console.log(thisName);
+            console.log("The Sign");
             console.log("Preview Url if available:");
             console.log(previewUrl);
             console.log("Album: ");
             console.log(album);
             console.log("Artists: ");
             console.log(artists);
-        }
-    })
+
+        });
+    } else {
+        console.log("Ooooops!");
+    }
+
+
 
 };
 
@@ -130,28 +178,51 @@ function spotifyThisSong() {
 
 function movieThis() {
 
-    var queryUrl = "http://www.omdbapi.com/?t=" + thisName + "&y=&plot=short&apikey=trilogy";
+    if (thisName = thisName) {
+        var queryUrl = "http://www.omdbapi.com/?t=" + thisName + "&y=&plot=short&apikey=trilogy";
 
-    console.log(queryUrl);
-
-    axios.get(queryUrl).then(
-        function (response) {
-            var respond = response.data;
-            console.log("Movie Title: " + respond.Title);
-            console.log("Year Movie Came Out: " + respond.Year);
-            console.log("imdb Rating: " + respond.imdbRating);
-            console.log("Rotten Tomatoes Rating: " + respond.Ratings[1].Value);
-            console.log("Country: " + respond.Country);
-            console.log("Primary Language: " + respond.Language);
-            console.log("Plot: " + respond.Plot);
-            console.log("Actors: " + respond.Actors);
-
-        })
-        /*   
-        var queryUrl = "http://www.omdbapi.com/?t=Mr.+Nobody&y=&plot=short&apikey=trilogy";
-    
         console.log(queryUrl);
-    
+
+        axios.get(queryUrl).then(
+            function (response) {
+                var respond = response.data;
+                console.log("Movie Title: " + respond.Title);
+                console.log("Year Movie Came Out: " + respond.Year);
+                console.log("imdb Rating: " + respond.imdbRating);
+                console.log("Rotten Tomatoes Rating: " + respond.Ratings[1].Value);
+                console.log("Country: " + respond.Country);
+                console.log("Primary Language: " + respond.Language);
+                console.log("Plot: " + respond.Plot);
+                console.log("Actors: " + respond.Actors);
+
+            })
+            .catch(function (error) {
+                if (error.response) {
+                    // The request was made and the server responded with a status code
+                    // that falls out of the range of 2xx
+                    console.log("---------------Data---------------");
+                    console.log(error.response.data);
+                    console.log("---------------Status---------------");
+                    console.log(error.response.status);
+                    console.log("---------------Status---------------");
+                    console.log(error.response.headers);
+                } else if (error.request) {
+                    // The request was made but no response was received
+                    // `error.request` is an object that comes back with details pertaining to the error that occurred.
+                    console.log(error.request);
+                } else {
+                    // Something happened in setting up the request that triggered an Error
+                    console.log("Error", error.message);
+                }
+                console.log(error.config);
+            });
+    }
+    if (thisName == null) {
+
+        var queryUrl = "http://www.omdbapi.com/?t=Mr.+Nobody&y=&plot=short&apikey=trilogy";
+
+        console.log(queryUrl);
+
         axios.get(queryUrl).then(
             function (response) {
                 var respond = response.data;
@@ -163,29 +234,12 @@ function movieThis() {
                 console.log("Plot: " + respond.Plot);
                 console.log("Actors: " + respond.Actors);
             })
-    
-        }
-        */
-        .catch(function (error) {
-            if (error.response) {
-                // The request was made and the server responded with a status code
-                // that falls out of the range of 2xx
-                console.log("---------------Data---------------");
-                console.log(error.response.data);
-                console.log("---------------Status---------------");
-                console.log(error.response.status);
-                console.log("---------------Status---------------");
-                console.log(error.response.headers);
-            } else if (error.request) {
-                // The request was made but no response was received
-                // `error.request` is an object that comes back with details pertaining to the error that occurred.
-                console.log(error.request);
-            } else {
-                // Something happened in setting up the request that triggered an Error
-                console.log("Error", error.message);
-            }
-            console.log(error.config);
-        });
+
+
+    } else {
+        console.log("Oooops!");
+    }
+
 
 };
 
