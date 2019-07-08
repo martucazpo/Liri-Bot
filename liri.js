@@ -290,13 +290,12 @@ function doWhatItSays() {
             myConcert = dataArr[5];
 
             var queryUrl = "https://rest.bandsintown.com/artists/" + myConcert + "/events?app_id=codingbootcamp";
-
-            console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-
+            console.log(queryUrl);
 
             axios.get(queryUrl).then(
                 function (response) {
                     var respond = response.data;
+                    console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
                     console.log("Lineup: " + JSON.stringify(respond[1].lineup));
                     console.log("Location: " + respond[1].venue.name + ", " + respond[1].venue.city + ", " + respond[1].venue.country);
                     console.log(moment(respond[1].datetime).format("MM/DD/YYYY"));
@@ -306,7 +305,6 @@ function doWhatItSays() {
                     if (error.response) {
                         // The request was made and the server responded with a status code
                         // that falls out of the range of 2xx
-                        console.log("---------------Data---------------");
                         console.log(error.response.data);
                         console.log("---------------Status---------------");
                         console.log(error.response.status);
