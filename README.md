@@ -14,3 +14,13 @@ As with *movie-this* the user types **node liri.js concert-this** into the conso
 
 ### spotify-this-song
 
+Rather than doing something bold and invasive with music, as the name might imply, this function does a gentle search of the Spotify music data base. Like *movie-this* and *concert-this* the user enters **node liri.js** into the console, followed by **spotify-this-song** a space and the songs name in quotes. (i.e. **node liri.js spotify-this-song "my song"**). As many songs are performed by different artists, or performed by the same artist but in a different way, when the user presses enter he or she will recieve five returns on the song query. Each return will have the song's name, a preview link of the song (if available), the album that the song is from, and a return from Spotify called a *simple artist object* that has the artist's or artists' name(s).
+
+### do-what-it-says
+
+Unlike the previous three functions, *do-what-it-says* does not directly recieve user input. The commands for *do-what-it-says* are the other three functions performed by Liri-Bot, namely: *movie-this* , *concert-this* and *spotify-this-song*. the parameters each function will fulfill, however are written in a separate text file. This file has commands such as *movie-this* as well as the name of the movie to recieve that action.
+
+Like its predecessors however, the user still needs to navigate to Liri-Bot in the console. There he or she types, as always, **node liri.js** followed by the command **do-what-it-says**. Unlike the previous three functions, at this point the user presses enter. What follows is a printed copy of the text file and the returns of the functions therein contained.
+
+In its current incarnation, the Liri-Bot needs to have its text file changed manually, but in future versions the text file could be made into an object, with the keys as commands and the values as queries. This could be usefull, for example, if a text file or an email could be sent to another computer and then those commands could be carried out by the liri-node-app in the console.
+
