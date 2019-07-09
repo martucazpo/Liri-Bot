@@ -24,24 +24,26 @@ var thisName = "";
 
 for (var i = 3; i < nodeArgs.length; i++) {
 
-    if (i > 3 && i < nodeArgs.length) {
-        thisName = thisName + "+" + nodeArgs[i];
-    } else {
-        thisName += nodeArgs[i];
-    }
+  if (i > 3 && i < nodeArgs.length) {
+    thisName = thisName + "+" + nodeArgs[i];
+  } else {
+    thisName += nodeArgs[i];
+
+  }
 }
+
 
 switch (action) {
     case "movie-this":
-        movieThis(noArgument);
+        movieThis(thisName);
         break;
 
     case "concert-this":
-        concertThis();
+        concertThis(thisName);
         break;
 
     case "spotify-this-song":
-        spotifyThisSong(noArgument);
+        spotifyThisSong(thisName);
         break;
 
     case "do-what-it-says":
@@ -54,13 +56,13 @@ switch (action) {
 
 
 // `concert-this`
-function concertThis(concertGroup) {
-
-    if(concertGroup != ""){
-        concertGroup = "Celine Dion"
+function concertThis(thisName) {
+console.log(thisName);
+    if(thisName == ""){
+        thisName = "Celine Dion"
     }
 
-    var queryUrl = "https://rest.bandsintown.com/artists/" + concertGroup + "/events?app_id=codingbootcamp";
+    var queryUrl = "https://rest.bandsintown.com/artists/" + thisName + "/events?app_id=codingbootcamp";
 
     console.log(queryUrl);
 
@@ -99,13 +101,13 @@ function getArtistName(artist){
     return artist.name;
 }
 
-function spotifyThisSong(songName) {
+function spotifyThisSong(thisName) {
 
-    if(songName != ""){
-        songName = "The Sign"
+    if(thisName == ""){
+        thisName = "The Sign"
     }
         
-        spotify.search({ type: 'track', query: songName, limit: 5 }, function (err, data) {
+        spotify.search({ type: 'track', query: thisName, limit: 5 }, function (err, data) {
             if (err) {
                 return console.log('Error occurred: ' + err);
             }
@@ -118,7 +120,7 @@ function spotifyThisSong(songName) {
                 previewUrl = data.tracks.items[h].preview_url;
                 album = data.tracks.items[h].album.name;
                 artists = data.tracks.items[h].album.artists.map(getArtistName);
-                console.log("Song: " + songName );
+                console.log("Song: " + thisName );
                 console.log("Preview Url if available:" + previewUrl);
                 console.log("Album: " + album);
                 console.log("Artists: " + artists);
@@ -128,14 +130,13 @@ function spotifyThisSong(songName) {
 
 };
 
-// `spotify-this-song`
 
-function movieThis(movieName) {
+function movieThis(thisName) {
+console.log(thisName);
+    if (thisName == "") {
+        thisName = "Mr. Nobody"}
 
-    if (movieName != "") {
-        movieName = "Mr. Nobody"}
-
-        var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy";
+        var queryUrl = "http://www.omdbapi.com/?t=" + thisName + "&y=&plot=short&apikey=trilogy";
 
         console.log(queryUrl);
 
@@ -212,15 +213,11 @@ function doWhatItSays() {
 
                 previewUrl = data.tracks.items[h].preview_url;
                 album = data.tracks.items[h].album.name;
-                artists = data.tracks.items[h].artists;
-                console.log("Song: ");
-                console.log(doSong);
-                console.log("Preview Url if available:");
-                console.log(previewUrl);
-                console.log("Album: ");
-                console.log(album);
-                console.log("Artists: ");
-                console.log(artists);
+                artists = data.tracks.items[h].album.artists.map(getArtistName);
+                console.log("Song: " + doSong);
+                console.log("Preview Url if available:" + previewUrl);
+                console.log("Album: " + album);
+                console.log("Artists: " + artists);
             }
 
         });
