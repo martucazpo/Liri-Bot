@@ -33,7 +33,7 @@ for (var i = 3; i < nodeArgs.length; i++) {
 
 switch (action) {
     case "movie-this":
-        movieThis();
+        movieThis(noArgument);
         break;
 
     case "concert-this":
@@ -41,7 +41,7 @@ switch (action) {
         break;
 
     case "spotify-this-song":
-        spotifyThisSong();
+        spotifyThisSong(noArgument);
         break;
 
     case "do-what-it-says":
@@ -54,9 +54,13 @@ switch (action) {
 
 
 // `concert-this`
-function concertThis() {
+function concertThis(concertGroup) {
 
-    var queryUrl = "https://rest.bandsintown.com/artists/" + thisName + "/events?app_id=codingbootcamp";
+    if(concertGroup != ""){
+        concertGroup = "Celine Dion"
+    }
+
+    var queryUrl = "https://rest.bandsintown.com/artists/" + concertGroup + "/events?app_id=codingbootcamp";
 
     console.log(queryUrl);
 
@@ -89,97 +93,49 @@ function concertThis() {
             console.log(error.config);
         });
 
-  /*  if (queryUrl == null) {
-        var queryUrl = "https://rest.bandsintown.com/artists/Celine+Dion/events?app_id=codingbootcamp";
-
-        console.log(queryUrl);
-
-        axios.get(queryUrl).then(
-            function (response) {
-                var respond = response.data;
-                console.log("Lineup: " + JSON.stringify(respond[1].lineup));
-                console.log("Location: " + respond[1].venue.name + ", " + respond[1].venue.city + ", " + respond[1].venue.country);
-                console.log(moment(respond[1].datetime).format("MM/DD/YYYY"));
-            })
-    } else {
-        console.log("Oooooops!");
-    }*/
-
-
 }
 
-function spotifyThisSong() {
+function getArtistName(artist){
+    return artist.name;
+}
 
+function spotifyThisSong(songName) {
 
-    if (thisName == thisName) {
-
-        var artists;
-        var album;
-        var previewUrl;
-        var handleData;
-
-
-        spotify.search({ type: 'track', query: thisName, limit: 5 }, function (err, data) {
+    if(songName != ""){
+        songName = "The Sign"
+    }
+        
+        spotify.search({ type: 'track', query: songName, limit: 5 }, function (err, data) {
             if (err) {
                 return console.log('Error occurred: ' + err);
             }
 
-            handleData = data.tracks.items
-
+           var handleData = data.tracks.items
+        
             for (var h = 0; h < handleData.length; h++) {
 
                 console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
                 previewUrl = data.tracks.items[h].preview_url;
                 album = data.tracks.items[h].album.name;
-                artists = data.tracks.items[h].artists;
-                console.log("Song: ");
-                console.log(thisName);
-                console.log("Preview Url if available:");
-                console.log(previewUrl);
-                console.log("Album: ");
-                console.log(album);
-                console.log("Artists: ");
-                console.log(artists);
+                artists = data.tracks.items[h].album.artists.map(getArtistName);
+                console.log("Song: " + songName );
+                console.log("Preview Url if available:" + previewUrl);
+                console.log("Album: " + album);
+                console.log("Artists: " + artists);
             }
         })
-    }
-
-    if (thisName == null) {
-
-        spotify.search({ type: 'track', query: 'The Sign', limit: 1 }, function (err, data) {
-            if (err) {
-                return console.log('Error occurred: ' + err);
-            }
-
-            console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-
-            previewUrl = data.tracks.items.preview_url;
-            album = data.tracks.items.album.name;
-            artists = data.tracks.items.artists;
-            console.log("Song: ");
-            console.log("The Sign");
-            console.log("Preview Url if available:");
-            console.log(previewUrl);
-            console.log("Album: ");
-            console.log(album);
-            console.log("Artists: ");
-            console.log(artists);
-
-        });
-    } else {
-        console.log("Ooooops!");
-    }
-
-
+    
 
 };
 
 // `spotify-this-song`
 
-function movieThis() {
+function movieThis(movieName) {
 
-    if (thisName = thisName) {
-        var queryUrl = "http://www.omdbapi.com/?t=" + thisName + "&y=&plot=short&apikey=trilogy";
+    if (movieName != "") {
+        movieName = "Mr. Nobody"}
+
+        var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy";
 
         console.log(queryUrl);
 
@@ -216,31 +172,7 @@ function movieThis() {
                 }
                 console.log(error.config);
             });
-    }
-    if (nodeArgs == null || nodeArgs == undefined) {
-
-        var queryUrl = "http://www.omdbapi.com/?t=Mr.+Nobody&y=&plot=short&apikey=trilogy";
-
-        console.log(queryUrl);
-
-        axios.get(queryUrl).then(
-            function (response) {
-                var respond = response.data;
-                console.log("Movie Title: " + respond.Title);
-                console.log("Year Movie Came Out: " + respond.Year);
-                console.log("imdb Rating: " + respond.imdbRating);
-                console.log("Rotten Tomatoes Rating: " + respond.Ratings[1].Value);
-                console.log("Country: " + respond.Country);
-                console.log("Plot: " + respond.Plot);
-                console.log("Actors: " + respond.Actors);
-            })
-
-
-    } else {
-        console.log("Oooops!");
-    }
-
-
+    
 };
 
 // `do-what-it-says`
