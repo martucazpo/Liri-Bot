@@ -9,7 +9,7 @@ The user accesses Liri-Bot from the console, where he or she navigates to the fo
 To access movie information the user types **movie-this** into the console, followed by the name of the movie in quotes. At this point the console should read **node liri.js movie-this "name of movie"**. When the user pushes enter, information about the movie appears, including the title of the movie, the year the movie came out, the IMDB rating of the movie, the Rotten Tomatoes rating of the movie, the country where the movie was produced, the language of the movie, the plot of the movie, and the actors in the movie. If no movie has been entered after the command *movie-this*, Liri-Bot will return the data for *Mr.Nobody*.
 
 Here is a screenshot that returns the input for "Sleeping Beauty":
-![Screenshot (8).png]
+![Screenshot (8).png](https://martucazpo.github.io/Liri-node-app/images/Screenshot(8).png)
 
 ### concert-this
 
@@ -40,4 +40,4 @@ This is a screenshot of node liri.js do-what-it-says :
 
 The following is a demo video of Liri-Bot performing all of its functions. Additionally it demonstrates the default returns.
 
-[Google Classroom Link]https://classroom.google.com/c/NDA4MzkyNjA4MzJa/m/NDA4MzgyNTIxNjFa/details
+[Google Classroom Link] https://classroom.google.com/c/NDA4MzkyNjA4MzJa/m/NDA4MzgyNTIxNjFa/details
