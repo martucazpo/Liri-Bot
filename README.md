@@ -64,7 +64,7 @@ Like its predecessors the user will still need to navigate to Liri-Bot in the co
 In its current incarnation, the Liri-Bot needs to have its text file changed manually, but in future versions the text file could be made into an object, with the keys as commands and the values as queries. This could be usefull, for example, if a text file or an email could be sent to another computer and then those commands could be carried out by the liri-node-app in the console.
 
 This is a screenshot of node liri.js do-what-it-says :
-![Screenshot (11).png](images\Screenshot (10).png)
+![Screenshot (11).png](images\Screenshot (11).png)
 
 ## Demo Video:
 
